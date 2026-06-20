@@ -3580,24 +3580,24 @@ img {
     font-size: 11px;
 }
 .options-label {
-    color: var(--text-muted, #888);
-    font-weight: 500;
+    color: var(--accent-gold, #c9a962);
+    font-weight: 600;
     margin-right: 2px;
     white-space: nowrap;
 }
 .option-tag {
-    background: rgba(92,107,74,0.10);
-    color: var(--olive-soft, #5c6b4a);
+    background: rgba(201,169,98,0.15);
+    color: var(--accent-gold, #c9a962);
     border-radius: 20px;
     padding: 2px 8px;
     font-size: 10.5px;
-    font-weight: 500;
-    border: 1px solid rgba(92,107,74,0.18);
+    font-weight: 600;
+    border: 1px solid rgba(201,169,98,0.35);
     white-space: nowrap;
 }
 .option-tag.more {
-    background: var(--olive-soft, #5c6b4a);
-    color: #fff;
+    background: var(--accent-gold, #c9a962);
+    color: var(--olive-dark, #3d4a2f);
 }
 
 /* Personalize button variant */
