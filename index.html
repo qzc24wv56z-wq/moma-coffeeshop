@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moma CoffeeShop | Café Premium en Ahuachapán</title>
+    <meta name="description" content="Moma CoffeeShop - Disfruta del mejor café artesanal en Ahuachapán, El Salvador. Bebidas frías, calientes, postres y platillos premium.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loader -->
+    <div id="loader" class="loader">
+        <div class="loader-content">
+            <div class="coffee-cup">
+                <div class="coffee-steam"></div>
+                <div class="coffee-steam"></div>
+                <div class="coffee-steam"></div>
+            </div>
+            <p>Preparando tu experiencia...</p>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo" onclick="goToHero()">
+                <img src="images/logo.png" alt="Moma CoffeeShop Logo" class="logo-icon">
+            </a>
+
+            <div class="nav-links" id="navLinks">
+                <a href="#" onclick="goToHero()">Inicio</a>
+                <a href="#promociones" onclick="showMenu()">Promociones</a>
+                <a href="#menu" onclick="showMenu()">Menú</a>
+                <a href="#historia">Historia</a>
+                <a href="#ubicacion">Ubicación</a>
+                <a href="#redes">Redes</a>
+                <a href="#resenas">Reseñas</a>
+                <a href="#mural">Mural</a>
+            </div>
+
+            <div class="nav-actions">
+                <div class="search-container">
+                    <button class="search-btn" onclick="toggleSearch()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.35-4.35"/>
+                        </svg>
+                    </button>
+                    <div class="search-dropdown" id="searchDropdown">
+                        <input type="text" id="searchInput" placeholder="Buscar productos..." oninput="searchProducts()">
+                        <div class="search-results" id="searchResults"></div>
+                    </div>
+                </div>
+
+                <!-- User Welcome (shown when logged in) -->
+                <div class="user-welcome-inline" id="userWelcome" style="display: none;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    <span>Hola, <strong id="userName"></strong></span>
+                    <button onclick="openMyOrders()" class="myorders-btn">Mis Pedidos</button>
+                    <button onclick="logout()">Salir</button>
+                </div>
+
+                <button class="nav-btn" onclick="openModal('registerModal')">Registro</button>
+                <button class="nav-btn" onclick="openModal('loginModal')">Iniciar Sesion</button>
+                
+                <button class="cart-btn" onclick="toggleCart()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <path d="M16 10a4 4 0 0 1-8 0"/>
+                    </svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#" onclick="goToHero(); closeMobileMenu()">Inicio</a>
+            <a href="#promociones" onclick="showMenu(); closeMobileMenu()">Promociones</a>
+            <a href="#menu" onclick="showMenu(); closeMobileMenu()">Menu</a>
+            <a href="#historia" onclick="closeMobileMenu()">Historia</a>
+            <a href="#ubicacion" onclick="closeMobileMenu()">Ubicacion</a>
+            <a href="#redes" onclick="closeMobileMenu()">Redes</a>
+            <a href="#resenas" onclick="closeMobileMenu()">Reseñas</a>
+            <a href="#mural" onclick="closeMobileMenu()">Mural</a>
+            <button class="nav-btn" onclick="openModal('registerModal'); closeMobileMenu()">Registro</button>
+            <button class="nav-btn" onclick="openModal('loginModal'); closeMobileMenu()">Iniciar Sesion</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title animate-fade-in-delay">Bienvenido</h1>
+            <p class="hero-subtitle animate-fade-in-delay-2">Donde cada taza cuenta una historia de pasión y tradición salvadoreña</p>
+            <button class="hero-btn animate-fade-in-delay-3" onclick="showMenu()">
+                Ingresar al Menú
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </button>
+        </div>
+       <div class="hero-scroll-indicator">
+   <span>Desliza o presiona</span>
+   <div class="scroll-arrow"></div>
+</div>
+
+    </section>
+
+    <!-- Promotions Section -->
+    <section id="promociones" class="promociones-section hidden">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" id="promoTag">Hoy</span>
+                <h2 class="section-title">Promociones del Día</h2>
+                <p class="section-subtitle" id="promoSubtitle">Ofertas especiales preparadas para ti</p>
+            </div>
+            <div class="promos-grid" id="promosGrid">
+                <!-- Promotions loaded by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu-section hidden">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Descubre</span>
+                <h2 class="section-title">Nuestro Menú</h2>
+                <p class="section-subtitle">Selección artesanal de bebidas y delicias preparadas con amor</p>
+            </div>
+
+            <!-- Category Tabs -->
+            <div class="category-tabs">
+                <button class="tab-btn active" onclick="filterCategory('all')">Todos</button>
+                <button class="tab-btn" onclick="filterCategory('frias')">Bebidas Frías</button>
+                <button class="tab-btn" onclick="filterCategory('calientes')">Bebidas Calientes</button>
+                <button class="tab-btn" onclick="filterCategory('postres')">Postres</button>
+                <button class="tab-btn" onclick="filterCategory('platillos')">Platillos</button>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Historia Section -->
+    <section id="historia" class="historia-section">
+        <div class="container">
+            <div class="historia-grid">
+                <div class="historia-content">
+                    <span class="section-tag">Desde 2018</span>
+                    <h2 class="section-title">Nuestra Historia</h2>
+                    <p class="historia-text">
+                      Nuestra cafetería nació con el nombre MI CAFÉ. Todo nos llevó a la idea de ser una cafetería de especialidad. Iniciamos con recursos muy limitados, en un kiosco móvil, para poder pagar nuestros estudios universitarios y, de esta manera, sobrellevar nuestros gastos como emprendedores, esposos y estudiantes.
+
+                    </p>
+                    <p class="historia-text">
+                    A lo largo de dos años estuvimos establecidos en el Parque La Concordia cada fin de semana, con un menú sencillo, pero en el que cada bebida era elaborada de manera artesanal, aun cuando la maquinaria que utilizábamos tenía un funcionamiento casero y no estaba diseñada para trabajar bajo demanda.
+
+                    </p>
+                    <p class="historia-text">
+                     Sin embargo, todo esto nos ayudó a mejorar nuestros procesos de preparación a través de las diferentes opiniones de los clientes. En esta etapa aprendimos que la atención al cliente es muy importante, ya que tuvimos que luchar contra nuestros propios miedos al hablar con muchas personas, pues no contábamos con ningún tipo de experiencia previa. No obstante, nuestra perseverancia y nuestras ganas de salir adelante nos impulsaron desde el primer día.
+                    </p>
+                    <p class="historia-text">
+                     Durante el año 2020 subsistimos en pandemia ejecutando estrategias de venta como CAFÉ GRATIS + DELIVERY. Nos mantuvimos muy activos en redes sociales para captar nuevos clientes y fidelizar a quienes ya nos conocían, logrando así realizar ventas diarias y pagar el alquiler de nuestro primer local, que aún no podíamos abrir debido a la pandemia.
+                    </p>
+                    <p class="historia-text">
+                     Durante todos estos años nos hemos esforzado mucho, y nuestros clientes lo han notado. Nuestro mercado ha incrementado, ya que cada producto que ofrecemos hoy en día está prácticamente estandarizado, y estamos capacitados como baristas y catadores para realizar nuestro trabajo de manera más profesional. Además, hemos mejorado nuestra maquinaria y, gracias a todo esto, hemos podido crear fuentes de trabajo para jóvenes a través de nuestra cafetería.
+                    </p>
+                    <p class="historia-text">
+                     Hemos aprendido mucho a lo largo de todos estos años, pero hay algo que tenemos muy claro: nunca debemos caer en nuestra zona de confort. Este año 2025 trajo muchísimos cambios para los cuales no estábamos preparados, desde cambiar nuestro nombre, con el que muchas personas nos conocían, hasta tener que solicitar permisos para nuestro funcionamiento.
+                    </p>
+                    <p class="historia-text">
+                     Hoy, MOMA COFFEESHOP es mucho más que una cafetería.
+Es el reflejo de cada amanecer de sacrificio, de cada cliente que creyó en nosotros y de cada taza servida con amor y propósito. Seguimos creciendo, no solo como marca, sino también como familia y como equipo. Y aunque el camino no ha sido fácil, hoy caminamos con más convicción que nunca.
+Porque ahora no solo servimos café: construimos sueños, inspiramos a otros emprendedores y, sobre todo, queremos dejarle a nuestra hija el ejemplo de que todo es posible si se trabaja con pasión, ética y corazón.
+                    </p>
+                    <div class="historia-stats">
+                        <div class="stat">
+                            <span class="stat-number">5+</span>
+                            <span class="stat-label">Años de experiencia</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">10K+</span>
+                            <span class="stat-label">Clientes felices</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Café salvadoreño</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="historia-images">
+                    <div class="historia-img-1">
+                        <img src="images/prensa-cafe.png" alt="Espresso siendo preparado">
+                    </div>
+                    <div class="historia-img-2">
+                        <img src="images/taza-cafe.png" alt="Estación de café con Chemex y molinillo">
+                    </div>
+                    <div class="historia-img-3">
+                        <img src="images/cafe-postre.png" alt="Café con postre gourmet">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ubicación Section -->
+    <section id="ubicacion" class="ubicacion-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Encuéntranos</span>
+                <h2 class="section-title">Nuestra Ubicación</h2>
+                <p class="section-subtitle">Te esperamos en el corazón de Ahuachapán</p>
+            </div>
+
+            <div class="ubicacion-grid">
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31006.89837006!2d-89.8513!3d13.9217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f62e6d8c2b0e0c3%3A0x8f2c0d8d8c3e8f8!2sAhuachap%C3%A1n%2C%20El%20Salvador!5e0!3m2!1ses!2sus!4v1620000000000!5m2!1ses!2sus" 
+                        width="100%" 
+                        height="400" 
+                        style="border:0; border-radius: 20px;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <div class="ubicacion-info">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="info-content">
+                            <h4>Dirección</h4>
+                            <p>Ahuachapán, Ahuachapán<br>El Salvador</p>
+                        </div>
+                    </div>
+
+                    <div class="info-card horarios-card">
+                        <div class="info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12,6 12,12 16,14"/>
+                            </svg>
+                        </div>
+                        <div class="info-content">
+                            <h4>Horarios</h4>
+                            <div class="horarios-box">
+                                <div class="horarios-list">
+                                    <p><span>Lunes:</span> 11:00 AM - 8:30 PM</p>
+                                    <p class="cerrado"><span>Martes:</span> CERRADO</p>
+                                    <p><span>Miercoles:</span> 11:00 AM - 8:30 PM</p>
+                                    <p><span>Jueves:</span> 11:00 AM - 8:30 PM</p>
+                                    <p><span>Viernes:</span> 11:00 AM - 8:30 PM</p>
+                                    <p><span>Sabado:</span> 11:00 AM - 8:30 PM</p>
+                                    <p><span>Domingo:</span> 11:00 AM - 8:30 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                        </div>
+                        <div class="info-content">
+                            <h4>Contacto</h4>
+                            <p>+503 7433 8506</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  
+
+    <!-- Redes Sociales Section -->
+    <section id="redes" class="redes-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Síguenos</span>
+                <h2 class="section-title">Redes Sociales</h2>
+                <p class="section-subtitle">Conéctate con nosotros y descubre más contenido exclusivo</p>
+            </div>
+
+            <div class="social-grid">
+                <a href="https://www.facebook.com/share/1BHaqk4c5d/" target="_blank" class="social-card facebook">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    <span>Facebook</span>
+                    <p>@moma_sv</p>
+                </a>
+
+                <a href="https://www.instagram.com/moma_sv_?igsh=MXJoZ2dlaXNpM3VkZQ==" target="_blank" class="social-card instagram">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                    <span>Instagram</span>
+                    <p>@moma_sv_</p>
+                </a>
+
+                <a href="https://www.tiktok.com/@moma_sv_?_r=1&_t=ZS-96c9eArrWqK" target="_blank" class="social-card tiktok">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                    </svg>
+                    <span>TikTok</span>
+                    <p>@moma_sv_</p>
+                </a>
+
+                <a href="https://api.whatsapp.com/send?phone=50374338506&text=Hola%20me%20gustar%C3%ADa%20ordenar!%20%E2%9C%A8" target="_blank" class="social-card whatsapp">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    <span>WhatsApp</span>
+                    <p>+503 7433 8506</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reseñas Section -->
+    <section id="resenas" class="resenas-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Voces de nuestra comunidad</span>
+                <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+                <p class="section-subtitle">Cada taza inspira una experiencia única — y nos encanta escucharla</p>
+            </div>
+
+            <!-- Rating Summary -->
+            <div class="rating-summary">
+                <div class="rating-main">
+                    <div class="rating-number" id="ratingNumber">4.8</div>
+                    <div class="rating-stars-big">★★★★★</div>
+                    <div class="rating-count" id="ratingCount">3 reseñas</div>
+                </div>
+                <div class="rating-bars">
+                    <div class="bar-row"><span>5★</span><div class="bar-track"><div class="bar-fill" id="bar5" style="width:82%"></div></div><span id="pct5">82%</span></div>
+                    <div class="bar-row"><span>4★</span><div class="bar-track"><div class="bar-fill" id="bar4" style="width:12%"></div></div><span id="pct4">12%</span></div>
+                    <div class="bar-row"><span>3★</span><div class="bar-track"><div class="bar-fill" id="bar3" style="width:4%"></div></div><span id="pct3">4%</span></div>
+                    <div class="bar-row"><span>2★</span><div class="bar-track"><div class="bar-fill" id="bar2" style="width:1%"></div></div><span id="pct2">1%</span></div>
+                    <div class="bar-row"><span>1★</span><div class="bar-track"><div class="bar-fill" id="bar1" style="width:1%"></div></div><span id="pct1">1%</span></div>
+                </div>
+            </div>
+
+            <!-- Reviews Grid -->
+            <div class="resenas-grid" id="resenasGrid">
+                <div class="resena-card">
+                    <div class="resena-top">
+                        <div class="resena-avatar av1">MG</div>
+                        <div>
+                            <div class="resena-name">María González</div>
+                            <div class="resena-date">Mayo 2025</div>
+                        </div>
+                    </div>
+                    <div class="resena-stars">★★★★★</div>
+                    <span class="resena-category">Café &amp; Bebidas</span>
+                    <span class="resena-quote">"</span>
+                    <p class="resena-text">El mejor café que he tomado en Ahuachapán. El ambiente es precioso y la atención fue increíble desde que entré.</p>
+                </div>
+                <div class="resena-card">
+                    <div class="resena-top">
+                        <div class="resena-avatar av2">JR</div>
+                        <div>
+                            <div class="resena-name">Jorge Ramírez</div>
+                            <div class="resena-date">Abril 2025</div>
+                        </div>
+                    </div>
+                    <div class="resena-stars">★★★★★</div>
+                    <span class="resena-category">Atención al Cliente</span>
+                    <span class="resena-quote">"</span>
+                    <p class="resena-text">El personal es super amable y atento. Se nota que aman lo que hacen. Los postres son una delicia, volveré pronto.</p>
+                </div>
+                <div class="resena-card">
+                    <div class="resena-top">
+                        <div class="resena-avatar av3">AL</div>
+                        <div>
+                            <div class="resena-name">Ana López</div>
+                            <div class="resena-date">Marzo 2025</div>
+                        </div>
+                    </div>
+                    <div class="resena-stars">★★★★☆</div>
+                    <span class="resena-category">Platillos</span>
+                    <span class="resena-quote">"</span>
+                    <p class="resena-text">El desayuno estuvo riquísimo y el café frío es mi favorito. El lugar tiene un encanto especial, muy acogedor.</p>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="resenas-divider"></div>
+
+            <!-- Review Form -->
+            <div class="resena-form-wrapper" id="resenaFormWrapper">
+                <!-- Auth gate (shown when not logged in) -->
+                <div class="resena-auth-gate" id="resenaAuthGate">
+                    <div class="resena-auth-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </div>
+                    <h3>¿Quieres dejar tu reseña?</h3>
+                    <p>Inicia sesión o crea una cuenta para compartir tu experiencia en Moma CoffeeShop</p>
+                    <div class="resena-auth-btns">
+                        <button class="resena-login-btn" onclick="openModal('loginModal')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                                <polyline points="10 17 15 12 10 7"/>
+                                <line x1="15" y1="12" x2="3" y2="12"/>
+                            </svg>
+                            Iniciar sesión
+                        </button>
+                        <button class="resena-register-btn" onclick="openModal('registerModal')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <line x1="19" y1="8" x2="19" y2="14"/>
+                                <line x1="22" y1="11" x2="16" y2="11"/>
+                            </svg>
+                            Crear cuenta
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Actual form (shown when logged in) -->
+                <div class="resena-form-body" id="resenaFormBody" style="display:none">
+                    <div style="text-align:center; margin-bottom: 28px;">
+                        <span class="section-tag">Comparte tu experiencia</span>
+                        <h3 class="resena-form-title">Deja tu reseña</h3>
+                        <p class="resena-form-sub">Tu opinión nos ayuda a seguir mejorando cada día</p>
+                    </div>
+                    <div class="resena-form-row">
+                        <div class="resena-form-group">
+                            <label>Tu nombre</label>
+                            <input type="text" id="rev-name" placeholder="Ej: María García">
+                        </div>
+                        <div class="resena-form-group">
+                            <label>Categoría</label>
+                            <select id="rev-cat">
+                                <option value="">Seleccionar...</option>
+                                <option>Café &amp; Bebidas</option>
+                                <option>Atención al Cliente</option>
+                                <option>Platillos</option>
+                                <option>Ambiente</option>
+                                <option>Experiencia general</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="resena-form-group">
+                        <label class="stars-label">Calificación</label>
+                        <div class="resena-stars-input" id="starInput">
+                            <button class="star-btn" data-v="1" type="button">★</button>
+                            <button class="star-btn" data-v="2" type="button">★</button>
+                            <button class="star-btn" data-v="3" type="button">★</button>
+                            <button class="star-btn" data-v="4" type="button">★</button>
+                            <button class="star-btn" data-v="5" type="button">★</button>
+                        </div>
+                    </div>
+                    <div class="resena-form-group">
+                        <label>Tu reseña</label>
+                        <textarea id="rev-text" rows="4" placeholder="Cuéntanos sobre tu visita a Moma CoffeeShop..."></textarea>
+                    </div>
+                    <button class="resena-submit-btn" onclick="submitResena()">Publicar mi reseña</button>
+                    <div class="resena-success" id="resenaSuccess">
+                        <p>☕ ¡Gracias por compartir tu experiencia! Tu reseña ha sido recibida.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mural de Fotos Section -->
+    <section id="mural" class="mural-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Nuestra Comunidad</span>
+                <h2 class="section-title">Mural de Clientes</h2>
+                <p class="section-subtitle">Comparte tus momentos en Moma CoffeeShop y forma parte de nuestra familia</p>
+            </div>
+
+            <!-- Upload Area -->
+            <div class="mural-upload-wrapper" id="muralUploadWrapper">
+                <div class="mural-upload-box" id="muralDropZone">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mural-upload-icon">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    <h3>Sube tu foto</h3>
+                    <p>Arrastra una imagen aquí o haz clic para seleccionar</p>
+                    <p class="mural-upload-hint">JPG, PNG o WEBP · Máximo 5MB</p>
+                    <input type="file" id="muralFileInput" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="handleMuralUpload(event)">
+                    <button class="mural-select-btn" onclick="document.getElementById('muralFileInput').click()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="17 8 12 3 7 8"/>
+                            <line x1="12" y1="3" x2="12" y2="15"/>
+                        </svg>
+                        Seleccionar foto
+                    </button>
+                </div>
+
+                <!-- Preview before publish -->
+                <div class="mural-preview-area" id="muralPreviewArea" style="display:none">
+                    <img id="muralPreviewImg" src="" alt="Vista previa">
+                    <div class="mural-preview-actions">
+                        <input type="text" id="muralCaption" placeholder="Agrega un comentario (opcional)..." maxlength="120" class="mural-caption-input">
+                        <div class="mural-preview-btns">
+                            <button class="mural-cancel-btn" onclick="cancelMuralPreview()">Cancelar</button>
+                            <button class="mural-publish-btn" onclick="publishMuralPhoto()">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <line x1="12" y1="5" x2="12" y2="19"/>
+                                    <line x1="5" y1="12" x2="19" y2="12"/>
+                                </svg>
+                                Publicar en el mural
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Auth prompt (shown when not logged in) -->
+                <div class="mural-auth-prompt" id="muralAuthPrompt" style="display:none">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    <p>Debes iniciar sesión para subir fotos al mural</p>
+                    <div class="mural-auth-btns">
+                        <button class="mural-login-btn" onclick="openModal('loginModal')">Iniciar sesión</button>
+                        <button class="mural-register-btn" onclick="openModal('registerModal')">Crear cuenta</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo Grid (Mural) -->
+            <div class="mural-grid" id="muralGrid">
+
+                <div class="mural-photo-card" style="--photo-delay:0s">
+                    <div class="mural-photo-wrap">
+                        <img src="images/mural4.jpg" alt="Matcha Moma" loading="lazy">
+                        <div class="mural-photo-overlay">
+                            <span class="mural-photo-user">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                @matcha_lovers
+                            </span>
+                        </div>
+                    </div>
+                    <p class="mural-photo-caption">Salud con Moma Matcha 🌿☕</p>
+                </div>
+
+                <div class="mural-photo-card" style="--photo-delay:0.07s">
+                    <div class="mural-photo-wrap">
+                        <img src="images/mural2.jpg" alt="San Valentín Moma" loading="lazy">
+                        <div class="mural-photo-overlay">
+                            <span class="mural-photo-user">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                @café_lover_sv
+                            </span>
+                        </div>
+                    </div>
+                    <p class="mural-photo-caption">San Valentín en Moma fue perfecto ❤️</p>
+                </div>
+
+                <div class="mural-photo-card" style="--photo-delay:0.14s">
+                    <div class="mural-photo-wrap">
+                        <img src="images/mural5.jpg" alt="Cafés navideños Moma" loading="lazy">
+                        <div class="mural-photo-overlay">
+                            <span class="mural-photo-user">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                @navidad_moma
+                            </span>
+                        </div>
+                    </div>
+                    <p class="mural-photo-caption">Navidad sabe a Moma CoffeeShop 🎄</p>
+                </div>
+
+                <div class="mural-photo-card" style="--photo-delay:0.21s">
+                    <div class="mural-photo-wrap">
+                        <img src="images/mural7.jpg" alt="Mocca marshmallow" loading="lazy">
+                        <div class="mural-photo-overlay">
+                            <span class="mural-photo-user">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                @dulce_moma
+                            </span>
+                        </div>
+                    </div>
+                    <p class="mural-photo-caption">El mocca con marshmallow es otro nivel 🔥</p>
+                </div>
+
+                <div class="mural-photo-card" style="--photo-delay:0.28s">
+                    <div class="mural-photo-wrap">
+                        <img src="images/mural9.jpg" alt="Tostadas artesanales" loading="lazy">
+                        <div class="mural-photo-overlay">
+                            <span class="mural-photo-user">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                @toast_queen
+                            </span>
+                        </div>
+                    </div>
+                    <p class="mural-photo-caption">Las tostadas artesanales de Moma 😍🍞</p>
+                </div>
+
+                <div class="mural-photo-card" style="--photo-delay:0.35s">
+                    <div class="mural-photo-wrap">
+                        <img src="images/mural8.jpg" alt="Ambiente Moma" loading="lazy">
+                        <div class="mural-photo-overlay">
+                            <span class="mural-photo-user">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                @ambiente_sv
+                            </span>
+                        </div>
+                    </div>
+                    <p class="mural-photo-caption">El ambiente de Moma es único ✨</p>
+                </div>
+
+                <div class="mural-photo-card" style="--photo-delay:0.42s">
+                    <div class="mural-photo-wrap">
+                        <img src="images/mural3.jpg" alt="Cheesecake Moma" loading="lazy">
+                        <div class="mural-photo-overlay">
+                            <span class="mural-photo-user">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                @postre_moma
+                            </span>
+                        </div>
+                    </div>
+                    <p class="mural-photo-caption">Cheesecake de Moma, obra de arte 🍰</p>
+                </div>
+
+                <div class="mural-photo-card" style="--photo-delay:0.49s">
+                    <div class="mural-photo-wrap">
+                        <img src="images/mural10.jpg" alt="Cliente Moma" loading="lazy">
+                        <div class="mural-photo-overlay">
+                            <span class="mural-photo-user">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                @moma_vibes
+                            </span>
+                        </div>
+                    </div>
+                    <p class="mural-photo-caption">Mi lugar favorito en Ahuachapán ☕</p>
+                </div>
+
+                <div class="mural-photo-card" style="--photo-delay:0.56s">
+                    <div class="mural-photo-wrap">
+                        <img src="images/mural11.jpg" alt="Barista Moma" loading="lazy">
+                        <div class="mural-photo-overlay">
+                            <span class="mural-photo-user">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                @barista_sv
+                            </span>
+                        </div>
+                    </div>
+                    <p class="mural-photo-caption">El arte detrás de cada taza ☕🖤</p>
+                </div>
+
+                <div class="mural-photo-card" style="--photo-delay:0.63s">
+                    <div class="mural-photo-wrap">
+                        <img src="images/mural1.jpg" alt="Pan artesanal Moma" loading="lazy">
+                        <div class="mural-photo-overlay">
+                            <span class="mural-photo-user">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                @pan_artesanal
+                            </span>
+                        </div>
+                    </div>
+                    <p class="mural-photo-caption">Pan artesanal hecho con amor 🍞</p>
+                </div>
+
+                <div class="mural-photo-card" style="--photo-delay:0.70s">
+                    <div class="mural-photo-wrap">
+                        <img src="images/mural6.jpg" alt="Navidad Moma" loading="lazy">
+                        <div class="mural-photo-overlay">
+                            <span class="mural-photo-user">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                @diciembre_moma
+                            </span>
+                        </div>
+                    </div>
+                    <p class="mural-photo-caption">Diciembre con los mejores sabores 🎅</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="20" cy="30" rx="12" ry="18" fill="#5c6b4a"/>
+                            <ellipse cx="40" cy="30" rx="12" ry="18" fill="#4a5a3a"/>
+                        </svg>
+                        <span>Moma CoffeeShop</span>
+                    </div>
+                    <p class="footer-quote">"El café es un abrazo en una taza, una pausa que sabe a hogar."</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Horarios</h4>
+                    <p>Lun, Mié - Dom: 11:00 AM — 8:30 PM</p>
+                    <p class="cerrado">Martes: CERRADO</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Redes Sociales</h4>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/share/1BHaqk4c5d/" target="_blank" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/moma_sv_?igsh=MXJoZ2dlaXNpM3VkZQ==" target="_blank" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="https://www.tiktok.com/@moma_sv_?_r=1&_t=ZS-96c9eArrWqK" target="_blank" aria-label="TikTok">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                        </a>
+                        <a href="https://api.whatsapp.com/send?phone=50374338506&text=Hola%20me%20gustar%C3%ADa%20ordenar!%20%E2%9C%A8" target="_blank" aria-label="WhatsApp">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>Ahuachapán, El Salvador</p>
+                    <p>+503 7433 8506</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Moma CoffeeShop. Todos los derechos reservados.<br> Diseñado por Alisson Pineda, Justin Ramirez</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://api.whatsapp.com/send?phone=50374338506&text=Hola%20me%20gustar%C3%ADa%20ordenar!%20%E2%9C%A8" target="_blank" class="whatsapp-float" aria-label="Contactar por WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Tu Carrito</h3>
+            <button class="cart-close" onclick="toggleCart()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                </svg>
+                <p>Tu carrito está vacío</p>
+            </div>
+        </div>
+        <div class="cart-footer" id="cartFooter" style="display: none;">
+            <div class="cart-totals">
+                <div class="cart-subtotal">
+                    <span>Subtotal</span>
+                    <span id="cartSubtotal">$0.00</span>
+                </div>
+                <div class="cart-total">
+                    <span>Total</span>
+                    <span id="cartTotal">$0.00</span>
+                </div>
+            </div>
+            <button class="checkout-btn" onclick="openCheckout()">Finalizar Pedido</button>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('loginModal')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+            <div class="modal-header">
+                <h2>Iniciar Sesión</h2>
+                <p>Bienvenido de vuelta a Moma CoffeeShop</p>
+            </div>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Correo Electrónico</label>
+                    <input type="email" id="loginEmail" required placeholder="tu@email.com">
+                    <span class="error-message" id="loginEmailError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Contraseña</label>
+                    <input type="password" id="loginPassword" required placeholder="••••••••">
+                    <span class="error-message" id="loginPasswordError"></span>
+                </div>
+                <button type="submit" class="form-btn">Iniciar Sesión</button>
+            </form>
+            <p class="modal-switch">¿No tienes cuenta? <a href="#" onclick="switchModal('loginModal', 'registerModal')">Regístrate</a></p>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('registerModal')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+            <div class="modal-header">
+                <h2>Crear Cuenta</h2>
+                <p>Unete a la familia Moma CoffeeShop</p>
+            </div>
+            <form id="registerForm" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="registerName">Nombre Completo *</label>
+                    <input type="text" id="registerName" required placeholder="Tu nombre completo">
+                    <span class="error-message" id="registerNameError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Correo Electronico *</label>
+                    <input type="email" id="registerEmail" required placeholder="tu@email.com">
+                    <span class="error-message" id="registerEmailError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="registerPhone">Celular *</label>
+                    <input type="tel" id="registerPhone" required placeholder="+503 0000 0000">
+                    <span class="error-message" id="registerPhoneError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="registerAddress">Direccion Actual *</label>
+                    <div class="address-input-container">
+                        <textarea id="registerAddress" required placeholder="Tu direccion completa..." rows="2"></textarea>
+                        <button type="button" class="location-btn" onclick="getLocationForRegister()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <circle cx="12" cy="12" r="3"/>
+                                <line x1="12" y1="2" x2="12" y2="4"/>
+                                <line x1="12" y1="20" x2="12" y2="22"/>
+                                <line x1="2" y1="12" x2="4" y2="12"/>
+                                <line x1="20" y1="12" x2="22" y2="12"/>
+                            </svg>
+                            Usar mi ubicacion
+                        </button>
+                    </div>
+                    <span class="error-message" id="registerAddressError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Contrasena * (minimo 8 caracteres)</label>
+                    <input type="password" id="registerPassword" required placeholder="Minimo 8 caracteres">
+                    <span class="error-message" id="registerPasswordError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Confirmar Contrasena *</label>
+                    <input type="password" id="registerConfirmPassword" required placeholder="Confirma tu contrasena">
+                    <span class="error-message" id="registerConfirmPasswordError"></span>
+                </div>
+                <button type="submit" class="form-btn">Crear Cuenta</button>
+            </form>
+            <p class="modal-switch">Ya tienes cuenta? <a href="#" onclick="switchModal('registerModal', 'loginModal')">Inicia Sesion</a></p>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content checkout-content">
+            <button class="modal-close" onclick="closeModal('checkoutModal')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+            <div class="modal-header">
+                <h2>Finalizar Pedido</h2>
+                <p>Elige cómo deseas recibir tu pedido</p>
+            </div>
+            
+            <div class="checkout-options">
+                <button class="checkout-option" onclick="selectDeliveryOption('pickup')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9,22 9,12 15,12 15,22"/>
+                    </svg>
+                    <span>Recoger en Local</span>
+                </button>
+                <button class="checkout-option" onclick="selectDeliveryOption('delivery')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="1" y="3" width="15" height="13"/>
+                        <polygon points="16,8 20,8 23,11 23,16 16,16 16,8"/>
+                        <circle cx="5.5" cy="18.5" r="2.5"/>
+                        <circle cx="18.5" cy="18.5" r="2.5"/>
+                    </svg>
+                    <span>Delivery</span>
+                </button>
+            </div>
+
+            <div id="deliveryForm" style="display: none;">
+                <h3>Dirección de Entrega</h3>
+                <div class="delivery-map">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31006.89837006!2d-89.8513!3d13.9217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f62e6d8c2b0e0c3%3A0x8f2c0d8d8c3e8f8!2sAhuachap%C3%A1n%2C%20El%20Salvador!5e0!3m2!1ses!2sus!4v1620000000000!5m2!1ses!2sus" 
+                        width="100%" 
+                        height="200" 
+                        style="border:0; border-radius: 12px;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+                <div class="form-group">
+                    <label for="deliveryAddress">Dirección Completa</label>
+                    <textarea id="deliveryAddress" rows="3" placeholder="Escribe tu dirección completa..."></textarea>
+                </div>
+            </div>
+
+            <div class="order-summary" id="orderSummary">
+                <h3>Resumen del Pedido</h3>
+                <div id="orderItems"></div>
+                <div class="order-total">
+                    <span>Total:</span>
+                    <span id="orderTotal">$0.00</span>
+                </div>
+            </div>
+
+            <button class="form-btn whatsapp-order-btn" onclick="sendToWhatsApp()">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+                Enviar Pedido por WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- Product Options Modal (Sabores / Especialidades) -->
+    <div class="modal" id="productModal">
+        <div class="modal-content product-modal-content">
+            <button class="modal-close" onclick="closeModal('productModal')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+            <div id="productModalBody"></div>
+        </div>
+    </div>
+
+    <!-- Promo Customization Modal (sabores/especialidades/opciones del combo) -->
+    <div class="modal" id="promoModal">
+        <div class="modal-content product-modal-content">
+            <button class="modal-close" onclick="closeModal('promoModal')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+            <div id="promoModalBody"></div>
+        </div>
+    </div>
+
+    <!-- My Orders Modal -->
+    <div class="modal" id="myOrdersModal">
+        <div class="modal-content myorders-content">
+            <button class="modal-close" onclick="closeModal('myOrdersModal')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+            <div class="modal-header">
+                <h2>Mis Pedidos</h2>
+                <p>Historial de pedidos realizados</p>
+            </div>
+            <div id="myOrdersList" class="myorders-list"></div>
+        </div>
+    </div>
+
+    <script src="script.js" charset="UTF-8"></script>
+
+    <!-- =====================
+         MOMA CHATBOT
+         ===================== -->
+
+    <!-- Botón flotante Momita -->
+    <button class="moma-chat-fab" id="momaChatFab" onclick="toggleMomaChat()" aria-label="Abrir chat de ayuda">
+        <img src="images/momita-avatar.png" alt="Momita" class="fab-momita-img">
+        <span class="fab-badge" id="fabBadge" style="display:none">1</span>
+    </button>
+
+    <!-- Ventana del chat -->
+    <div class="moma-chat-window" id="momaChatWindow">
+        <div class="moma-chat-header">
+            <div class="chat-header-info">
+                <div class="chat-avatar-logo">
+                    <img src="images/momita-avatar.png" alt="Momita" style="width:42px; height:42px; object-fit:contain; border-radius:50%; background:#3d4a2f; padding:3px;">
+                </div>
+                <div>
+                    <div class="chat-title">Momita ☕</div>
+                    <div class="chat-status"><span class="status-dot"></span>En línea</div>
+                </div>
+            </div>
+            <button class="chat-close-btn" onclick="toggleMomaChat()" aria-label="Cerrar chat">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16">
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="moma-chat-messages" id="momaChatMessages">
+            <!-- Mensaje de bienvenida inicial -->
+            <div class="chat-msg bot">
+                <div class="msg-bubble">
+                    ¡Hola! ☕ Bienvenido a <strong>Moma CoffeeShop</strong>. Soy <strong>Momita</strong>, tu asistente virtual. ¿En qué puedo ayudarte hoy?
+                </div>
+            </div>
+            <div class="chat-quick-btns" id="quickBtns">
+                <button onclick="sendQuick('¿Qué bebidas tienen disponibles?')">Ver menú</button>
+                <button onclick="sendQuick('¿Cuáles son sus horarios?')">Horarios</button>
+                <button onclick="sendQuick('¿Cómo puedo hacer un pedido?')">Hacer pedido</button>
+                <button onclick="sendQuick('¿Dónde están ubicados?')">Ubicación</button>
+            </div>
+        </div>
+
+        <div class="moma-chat-typing" id="momaChatTyping" style="display:none">
+            <span></span><span></span><span></span>
+        </div>
+
+        <div class="moma-chat-input-area">
+            <input type="text" id="momaChatInput" placeholder="Escribe tu mensaje..." onkeydown="if(event.key==='Enter') sendMomaMessage()">
+            <button class="chat-send-btn" onclick="sendMomaMessage()" aria-label="Enviar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                    <line x1="22" y1="2" x2="11" y2="13"/>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+</body>
+</html>
