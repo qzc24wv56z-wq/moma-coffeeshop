@@ -149,7 +149,7 @@ const products = [
         price: 1.25,
         category: "calientes",
         categoryLabel: "Bebida Caliente",
-        image: "images/Café Negro.png",
+        image: "images/Cafe Negro.png",
     
     },
     {
@@ -159,7 +159,7 @@ const products = [
         price: 2.75,
         category: "calientes",
         categoryLabel: "Bebida Caliente",
-        image: "images/Café Americano.png",
+        image: "images/Cafe Americano.png",
     
     },
     {
